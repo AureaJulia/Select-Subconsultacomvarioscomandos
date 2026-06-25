@@ -1,0 +1,7 @@
+SELECT OrderDetailID,Quantity
+FROM OrderDetails
+WHERE Quantity = (
+SELECT MAX(Quantity)
+FROM OrderDetails
+)
+LIMIT 5;
