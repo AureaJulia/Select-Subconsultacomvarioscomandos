@@ -1,0 +1,10 @@
+SELECT CustomerName,
+CONCAT ('Ultima Compra em: ',
+(
+SELECT MAX(OrderDate)
+FROM Orders
+WHERE Orders.CustomerID = Customers.CustomerID
+)
+)AS Ultimacompra
+FROM Customers
+LIMIT 8;
