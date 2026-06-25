@@ -1,0 +1,7 @@
+SELECT ProductName, Price, Price * 10
+FROM Products
+WHERE Price * 10 < (
+SELECT MAX(Price)
+FROM Products
+)
+LIMIT 12;
