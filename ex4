@@ -1,0 +1,7 @@
+SELECT CONCAT (CustomerName, ' ', Country)
+FROM Customers
+WHERE Country = (
+SELECT Country
+FROM Suppliers
+WHERE SupplierID = 1
+);
