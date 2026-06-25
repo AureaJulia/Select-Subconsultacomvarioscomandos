@@ -1,0 +1,7 @@
+SELECT ProductName, Price,
+( SELECT AVG (Price)
+FROM Products
+WHERE Products.CategoryID = Products.CategoryID
+)
+FROM Products
+LIMIT 10;
