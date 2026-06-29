@@ -1,0 +1,9 @@
+SELECT CASE
+WHEN TotalQuantidade > 50 THEN '> 50'
+ELSE '<= 50'
+END AS FaixaQuantidade, COUNT(OrderID) AS QuantidadeEncomendas
+FROM (
+SELECT OrderID, SUM(Quantity) AS TotalQuantidade
+FROM OrderDetails
+GROUP BY OrderID ) AS totalpedidos
+GROUP BY FaixaQuantidade;
