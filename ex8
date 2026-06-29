@@ -1,0 +1,8 @@
+SELECT CONCAT(ShipperName,'-',Phone)
+FROM Shippers
+WHERE ShipperID IN (
+SELECT ShipperID
+FROM Orders
+WHERE CustomerID = 4
+)
+LIMIT 3;
