@@ -1,0 +1,7 @@
+SELECT CONCAT(ProductName,'-',Unit) AS Produto_unidade
+FROM Products
+WHERE SupplierID IN (
+SELECT SupplierID
+FROM Suppliers
+WHERE City = 'London'
+);
