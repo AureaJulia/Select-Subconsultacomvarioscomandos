@@ -1,0 +1,16 @@
+SELECT 
+    Cidade,
+    COUNT(CustomerID) AS Total_VIP
+FROM
+(
+    SELECT 
+        Customers.CustomerID,
+        Customers.City AS Cidade,
+        COUNT(Orders.OrderID) AS Total_Pedidos
+    FROM Customers
+    INNER JOIN Orders
+        ON Customers.CustomerID = Orders.CustomerID
+    GROUP BY Customers.CustomerID, Customers.City
+    HAVING COUNT(Orders.OrderID) > 3
+) AS Clientes_VIP
+GROUP BY Cidade;
