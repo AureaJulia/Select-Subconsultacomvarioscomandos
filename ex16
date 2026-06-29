@@ -1,0 +1,14 @@
+SELECT 
+    o1.ShipperID,
+    COUNT(o1.OrderID) AS TotalEncomendas
+
+FROM Orders o1
+
+WHERE EXISTS (
+    SELECT *
+    FROM Orders o2
+    WHERE YEAR(o2.OrderDate) = 1996
+    AND o2.ShipperID = o1.ShipperID
+)
+
+GROUP BY o1.ShipperID;
