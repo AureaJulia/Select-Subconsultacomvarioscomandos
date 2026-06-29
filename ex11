@@ -1,0 +1,12 @@
+SELECT EmployeeID, COUNT(OrderID) AS Total_Encomendas
+FROM Orders
+WHERE OrderID IN (
+SELECT OrderID 
+FROM OrderDetails 
+WHERE ProductID IN (
+SELECT ProductID 
+FROM Products 
+WHERE ProductName = 'Chais'
+)
+)
+GROUP BY EmployeeID;
