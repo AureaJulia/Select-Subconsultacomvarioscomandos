@@ -1,0 +1,12 @@
+SELECT ProductID, COUNT(OrderDetailID) AS Vezes_Vendido
+FROM OrderDetails
+WHERE ProductID IN (
+SELECT ProductID 
+FROM Products 
+WHERE CategoryID = (
+SELECT CategoryID 
+FROM Categories 
+WHERE CategoryName = 'Beverages'
+)
+)
+GROUP BY ProductID;
