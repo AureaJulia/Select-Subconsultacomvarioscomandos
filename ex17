@@ -1,0 +1,10 @@
+SELECT 
+s.SupplierName,
+COUNT(p.ProductID)
+
+FROM Suppliers s
+
+JOIN Products p
+ON s.SupplierID = p.SupplierID
+
+GROUP BY s.SupplierName;
