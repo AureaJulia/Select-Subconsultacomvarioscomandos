@@ -1,0 +1,8 @@
+SELECT ProductName, NovoPreco
+FROM (
+    SELECT ProductName,
+           Price * 0.8 AS NovoPreco
+    FROM Products
+) AS produtos_desconto
+WHERE NovoPreco > 50
+LIMIT 10;
