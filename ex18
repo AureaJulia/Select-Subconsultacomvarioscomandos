@@ -1,0 +1,13 @@
+SELECT 
+   c.Country,
+   (
+   SELECT COUNT(OrderID)
+   FROM Orders o
+   WHERE o.CustomerID IN (
+   SELECT CustomerID
+   FROM Customers
+   WHERE Country = c.Country
+  )
+ ) AS TotalEncomendas
+FROM Customers c
+GROUP BY c.Country;
