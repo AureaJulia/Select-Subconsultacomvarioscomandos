@@ -1,0 +1,11 @@
+SELECT 
+    CustomerID,
+    COUNT(*) AS TotalEncomendas
+FROM Orders
+GROUP BY CustomerID
+HAVING COUNT(*) > (
+    SELECT COUNT(*)
+    FROM Orders
+    WHERE CustomerID = 1
+)
+LIMIT 5;
