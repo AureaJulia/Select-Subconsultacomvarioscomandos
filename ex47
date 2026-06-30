@@ -1,0 +1,11 @@
+SELECT 
+    ProductName,
+    CONCAT('Novo Preço: ', Price * 1.05) AS Preco_Aumentado
+FROM Products
+WHERE EXISTS (
+    SELECT SupplierID
+    FROM Suppliers
+    WHERE Suppliers.SupplierID = Products.SupplierID
+    AND Country IN ('UK', 'Germany', 'France', 'Italy', 'Spain')
+)
+LIMIT 15;
