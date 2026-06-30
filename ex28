@@ -1,0 +1,10 @@
+SELECT 
+    EmployeeID,
+    COUNT(*) AS TotalEncomendas
+FROM Orders
+GROUP BY EmployeeID
+HAVING EXISTS (
+    SELECT *
+    FROM Orders
+    WHERE OrderDate = '1996-07-04'
+);
