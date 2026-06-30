@@ -1,0 +1,23 @@
+SELECT 
+    CONCAT(CustomerName, ' - ', City) AS ClienteCidade,
+    COUNT(Orders.OrderID) AS TotalCompras
+FROM Customers
+JOIN Orders 
+    ON Customers.CustomerID = Orders.CustomerID
+GROUP BY 
+    Customers.CustomerID,
+    CustomerName,
+    City
+HAVING COUNT(Orders.OrderID) > (
+    SELECT AVG(TotalCompras)
+    FROM (
+        SELECT 
+            COUNT(Orders2.OrderID) AS TotalCompras
+        FROM Customers AS C2
+        JOIN Orders AS Orders2
+            ON C2.CustomerID = Orders2.CustomerID
+        WHERE C2.City = Customers.City
+        GROUP BY C2.CustomerID
+    ) AS MediaCidade
+)
+LIMIT 5;
