@@ -1,0 +1,10 @@
+SELECT 
+    Country,
+    COUNT(*) AS TotalClientes
+FROM Customers
+GROUP BY Country
+HAVING COUNT(*) = (
+    SELECT COUNT(*)
+    FROM Customers
+    WHERE Country = 'USA'
+);
