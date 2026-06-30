@@ -1,0 +1,20 @@
+SELECT *
+INTO Logistica_Ativa
+FROM Shippers
+WHERE ShipperID IN (
+SELECT DISTINCT ShipperID
+FROM Orders
+WHERE OrderID IN (
+SELECT DISTINCT OrderID
+FROM OrderDetails
+WHERE ProductID IN (
+SELECT ProductID
+FROM Products
+WHERE CategoryID = (
+SELECT CategoryID
+FROM Categories
+WHERE CategoryName = 'Seafood'
+)
+)
+)
+);
