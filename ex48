@@ -1,0 +1,13 @@
+CREATE TABLE Estatistica_Cidades AS
+
+SELECT 
+    City,
+    COUNT(CustomerID) AS Total_Cidade,
+
+    (
+        SELECT COUNT(CustomerID)
+        FROM Customers
+    ) AS Total_Geral_Clientes
+
+FROM Customers
+GROUP BY City;
