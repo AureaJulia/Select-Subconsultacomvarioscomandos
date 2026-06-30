@@ -1,0 +1,10 @@
+SELECT 
+    CategoryID,
+    CONCAT('Categoria: ', CategoryID) AS NomeCategoria,
+    AVG(Price) AS MediaPreco
+FROM Products
+GROUP BY CategoryID
+HAVING AVG(Price) > (
+    SELECT AVG(Price)
+    FROM Products
+);
