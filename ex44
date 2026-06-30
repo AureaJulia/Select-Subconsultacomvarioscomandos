@@ -1,0 +1,13 @@
+CREATE TABLE Funcionarios_Destaque AS
+
+SELECT 
+    EmployeeID,
+    COUNT(OrderID) AS Total_Encomendas
+FROM Orders
+GROUP BY EmployeeID
+
+HAVING COUNT(OrderID) > (
+    SELECT COUNT(OrderID)
+    FROM Orders
+    WHERE EmployeeID = 3
+);
