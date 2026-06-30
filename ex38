@@ -1,0 +1,7 @@
+SELECT TOP 5 *
+INTO Super_Clientes
+FROM Customers
+WHERE CustomerID > ALL (
+SELECT EmployeeID 
+FROM Employees
+);
