@@ -1,0 +1,15 @@
+SELECT 
+    SupplierID,
+    COUNT(*) AS TotalProdutos
+FROM Products
+GROUP BY SupplierID
+HAVING COUNT(*) > ALL (
+    SELECT COUNT(*)
+    FROM Products
+    WHERE SupplierID IN (
+        SELECT SupplierID
+        FROM Suppliers
+        WHERE Country = 'UK'
+    )
+    GROUP BY SupplierID
+);
