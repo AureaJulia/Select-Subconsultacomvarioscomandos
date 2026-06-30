@@ -1,0 +1,14 @@
+SELECT 
+    ProductID,
+    SUM(Quantity) AS TotalVendido
+FROM OrderDetails
+GROUP BY ProductID
+HAVING SUM(Quantity) > (
+    SELECT SUM(Quantity)
+    FROM OrderDetails
+    WHERE ProductID = (
+        SELECT ProductID
+        FROM Products
+        WHERE ProductName = 'Tofu'
+    )
+);
