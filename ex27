@@ -1,0 +1,8 @@
+SELECT 
+    CategoryID,
+    MAX(Price) AS MaiorPreco
+FROM Products
+GROUP BY CategoryID
+HAVING MAX(Price) < (
+    SELECT 100
+);
