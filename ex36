@@ -1,0 +1,8 @@
+SELECT o1.*
+INTO Ultimas_Encomendas
+FROM Orders o1
+WHERE o1.OrderDate = (
+SELECT MAX(o2.OrderDate)
+FROM Orders o2
+WHERE o2.CustomerID = o1.CustomerID
+);
