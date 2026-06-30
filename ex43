@@ -1,0 +1,12 @@
+SELECT 
+    CONCAT('Categoria: ', CategoryName) AS Categoria,
+    COUNT(ProductID) AS Total_Produtos
+FROM Categories
+INNER JOIN Products
+ON Categories.CategoryID = Products.CategoryID
+WHERE CategoryID IN (
+    SELECT CategoryID
+    FROM Products
+    WHERE Price > 50
+)
+GROUP BY CategoryName;
