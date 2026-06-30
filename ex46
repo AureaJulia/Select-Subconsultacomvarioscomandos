@@ -1,0 +1,11 @@
+SELECT 
+    SupplierID,
+    COUNT(ProductID) AS Total_Produtos
+FROM Products
+WHERE CategoryID = (
+    SELECT CategoryID
+    FROM Categories
+    WHERE CategoryName = 'Condiments'
+)
+GROUP BY SupplierID
+HAVING COUNT(ProductID) > 1;
