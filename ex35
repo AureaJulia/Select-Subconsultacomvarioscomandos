@@ -1,0 +1,8 @@
+SELECT OrderID, TotalQuantidade
+INTO Encomendas_Volumosas
+FROM (
+SELECT OrderID, SUM(Quantity) AS TotalQuantidade
+FROM OrderDetails
+GROUP BY OrderID
+) AS SubqueryEncomendas
+WHERE TotalQuantidade > 100;
