@@ -1,0 +1,4 @@
+SELECT ProductName, Price, 
+(SELECT COUNT(*) FROM Products) AS TotalProdutos
+INTO Tabela_Auditoria
+FROM Products;
