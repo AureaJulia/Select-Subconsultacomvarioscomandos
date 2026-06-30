@@ -1,0 +1,10 @@
+CREATE TABLE Relatorio_Precos AS
+SELECT 
+    ProductName,
+    Price AS PrecoAtual,
+    Price - (
+        SELECT AVG(Price)
+        FROM Products
+    ) AS DiferencaParaMedia
+FROM Products
+LIMIT 20;
