@@ -1,0 +1,10 @@
+SELECT CONCAT(FirstName, ' ', LastName) AS NomeFuncionario
+INTO Equipa_Londres
+FROM Employees e
+WHERE EXISTS (
+SELECT 1 
+FROM Orders o
+INNER JOIN Customers c ON o.CustomerID = c.CustomerID
+WHERE o.EmployeeID = e.EmployeeID 
+AND c.City = 'London'
+);
