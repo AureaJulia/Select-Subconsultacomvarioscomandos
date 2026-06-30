@@ -1,0 +1,15 @@
+SELECT 
+    CONCAT(ProductName, ' - Ação Necessária') AS Produto,
+    Stock_Pendente
+FROM
+(
+    SELECT 
+        Products.ProductName,
+        Products.UnitsInStock - SUM(OrderDetails.Quantity) AS Stock_Pendente
+    FROM Products
+    INNER JOIN OrderDetails
+    ON Products.ProductID = OrderDetails.ProductID
+    GROUP BY Products.ProductID, Products.ProductName, Products.UnitsInStock
+) AS Estoque
+ORDER BY Stock_Pendente ASC
+LIMIT 10;
