@@ -1,0 +1,41 @@
+CREATE TABLE Relatorio_Diretoria AS
+
+SELECT 
+    CONCAT(Employees.LastName, ' ', Employees.FirstName) AS Funcionario,
+    COUNT(DISTINCT OrderDetails.ProductID) AS Total_Itens_Vendidos
+
+FROM Employees
+
+INNER JOIN Orders
+ON Employees.EmployeeID = Orders.EmployeeID
+
+INNER JOIN OrderDetails
+ON Orders.OrderID = OrderDetails.OrderID
+
+WHERE Orders.CustomerID IN (
+    SELECT CustomerID
+    FROM Customers
+    WHERE Country = 'USA'
+)
+
+GROUP BY Employees.EmployeeID, Employees.LastName, Employees.FirstName
+
+HAVING COUNT(DISTINCT OrderDetails.ProductID) > (
+
+    SELECT AVG(Total_Itens)
+    FROM (
+        SELECT COUNT(DISTINCT OrderDetails.ProductID) AS Total_Itens
+        FROM Orders
+        INNER JOIN OrderDetails
+        ON Orders.OrderID = OrderDetails.OrderID
+        WHERE Orders.CustomerID IN (
+            SELECT CustomerID
+            FROM Customers
+            WHERE Country = 'USA'
+        )
+        GROUP BY Orders.EmployeeID
+    ) AS Media_Vendas
+
+)
+
+LIMIT 3;
