@@ -1,0 +1,13 @@
+SELECT 
+    EmployeeID,
+    COUNT(*) AS TotalEncomendas
+FROM Orders
+GROUP BY EmployeeID
+HAVING COUNT(*) > (
+    SELECT AVG(Total)
+    FROM (
+        SELECT COUNT(*) AS Total
+        FROM Orders
+        GROUP BY EmployeeID
+    ) AS MediaFuncionarios
+);
