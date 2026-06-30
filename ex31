@@ -1,0 +1,8 @@
+SELECT *
+INTO Produtos_FornecedoresEUA
+FROM Products
+WHERE SupplierID IN (
+SELECT SupplierID 
+FROM Suppliers 
+WHERE Country = 'USA'
+);
