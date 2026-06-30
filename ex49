@@ -1,0 +1,12 @@
+SELECT 
+    CONCAT(YEAR(OrderDate), ' - Total: ', COUNT(OrderID)) AS Ano_Total
+FROM Orders
+GROUP BY YEAR(OrderDate)
+
+HAVING COUNT(OrderID) > (
+    SELECT COUNT(OrderID)
+    FROM Orders
+    WHERE YEAR(OrderDate) = 1997
+)
+
+LIMIT 3;
