@@ -1,0 +1,9 @@
+SELECT 
+    City,
+    COUNT(*) AS TotalFornecedores
+FROM Suppliers
+GROUP BY City
+HAVING COUNT(*) = (
+    SELECT COUNT(*)
+    FROM Shippers
+);
